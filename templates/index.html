@@ -1,6 +1,6 @@
 {% include "header.html" %}
 
-  <!-- Page Header -->
+  <!-- 페이지 헤더 -->
   <header class="masthead" style="background-image: url('https://images.unsplash.com/photo-1470092306007-055b6797ca72?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80')">
     <div class="overlay"></div>
     <div class="container">
@@ -15,7 +15,7 @@
     </div>
   </header>
 
-  <!-- Main Content -->
+  <!-- 주요 내용 -->
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
@@ -29,11 +29,13 @@
               {{post.subtitle}}
             </h3>
           </a>
-          <p class="post-meta">작성자: 
-            <a href="#">{{post.author.name}}</a>
+          <p class="post-meta">
+            <!-- 작성자 정보 -->
+            작성자: <a href="#">{{post.author.name}}</a>
             - {{post.date}}
             
             {% if current_user.id == 1: %}
+            <!-- 관리자 계정인 경우 게시물 삭제 링크 표시 -->
             <a href="{{url_for('delete_post', post_id=post.id) }}">✘</a>
             {% endif %}
           </p>
@@ -41,8 +43,7 @@
         <hr>
         {% endfor %}
 
-
-        <!-- New Post -->
+        <!-- 새 게시물 작성 버튼 -->
         <div class="clearfix">
           <a class="btn btn-primary float-right" href="{{url_for('add_new_post')}}">새 게시물 작성</a>
         </div>

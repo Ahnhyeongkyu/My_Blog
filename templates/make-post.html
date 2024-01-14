@@ -3,19 +3,21 @@
 
 {% block content %}
 {% include "header.html" %}
-  <!-- Page Header -->
+  <!-- 페이지 헤더 -->
   <header class="masthead" style="background-image: url('{{ url_for('static', filename='img/edit-bg.jpg')}}')">
     <div class="overlay"></div>
     <div class="container">
-      <div class="row">
+      <div class "row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="page-heading">
             {% if is_edit: %}
-            <h1>Edit Post</h1>
+            <!-- 수정 중인 경우 -->
+            <h1>글 수정</h1>
             {% else: %}
-            <h1>New Post</h1>
+            <!-- 새로운 글 작성 중인 경우 -->
+            <h1>새 글 작성</h1>
             {% endif %}
-            <span class="subheading">You're going to make a great blog post!</span>
+            <span class="subheading">멋진 블로그 포스트를 작성하세요!</span>
           </div>
         </div>
       </div>
@@ -25,8 +27,11 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
+        <!-- CKEditor 로드 -->
         {{ ckeditor.load() }}
+        <!-- CKEditor 구성 -->
         {{ ckeditor.config(name='body') }}
+        <!-- 글 작성 또는 수정 폼 표시 -->
         {{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
       </div>
     </div>
