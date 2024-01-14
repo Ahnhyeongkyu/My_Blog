@@ -56,7 +56,7 @@ class Comment(db.Model):
     text = db.Column(db.Text, nullable=False)
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     comment_author = db.relationship("User", back_populates="comments")
-    parent_post_id = db.Column(db.Integer, db.ForeignKey('blog_posts.id'), nullable=False)
+    parent_post_id = db.Column(db.Integer, db.ForeignKey('blog_posts.id', ondelete='CASCADE'), nullable=False)
     parent_post = db.relationship("BlogPost", back_populates="comments")
 
 #DB 생성
@@ -233,6 +233,8 @@ def edit_post(post_id):
 @admin_only
 def delete_post(post_id):
     post_to_delete = BlogPost.query.get(post_id)
+     # 게시물 삭제 전에 연결된 댓글도 함께 삭제
+    Comment.query.filter_by(parent_post_id=post_id).delete()
     db.session.delete(post_to_delete)
     db.session.commit()
     return redirect(url_for('get_all_posts'))
