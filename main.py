@@ -216,13 +216,12 @@ def edit_post(post_id):
     edit_form = CreatePostForm(
         title=post.title,
         subtitle=post.subtitle,
-        author=post.author,
         body=post.body
     )
     if request.method == "POST":
         post.title = edit_form.title.data
         post.subtitle = edit_form.subtitle.data
-        post.author = edit_form.author.data
+        post.author = current_user
         post.body = edit_form.body.data
         db.session.commit()
         return redirect(url_for("show_post", post_id=post.id))
