@@ -1,0 +1,65 @@
+{% include "header.html" %}
+
+  <!-- 페이지 헤더 -->
+  <header class="masthead" style="background-image: url('{{ url_for('static', filename='img/contact-bg.jpg')}}')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>문의하기</h1>
+            <span class="subheading">질문이 있나요? 답변해 드리겠습니다.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 주요 내용 -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <p>저에게 연락주실분은 아래 양식을 작성하여 메시지를 보내주시면 빠르게 답변해 드리겠습니다!</p>
+        <!-- 문의 양식 - 이 양식을 작동시키려면 mail/contact_me.php 파일의 19번째 라인에 이메일 주소를 입력하세요. -->
+        <!-- 경고: 일부 웹 호스트는 Gmail이나 Yahoo와 같은 일반 메일 호스트로의 양식을 통한 이메일 전송을 허용하지 않을 수 있습니다. 사설 도메인 이메일 주소를 사용하는 것이 좋습니다! -->
+        <!-- 문의 양식을 사용하려면 사이트가 PHP를 지원하는 실제 웹 호스트에 있어야 합니다! 이 양식은 로컬에서는 작동하지 않습니다! -->
+        <form name="sentMessage" id="contactForm" novalidate>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>이름</label>
+              <input type="text" class="form-control" placeholder="이름" id="name" required data-validation-required-message="이름을 입력하세요.">
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>이메일 주소</label>
+              <input type="email" class="form-control" placeholder="이메일 주소" id="email" required data-validation-required-message="이메일 주소를 입력하세요.">
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="form-group col-xs-12 floating-label-form-group controls">
+              <label>전화번호</label>
+              <input type="tel" class="form-control" placeholder="전화번호" id="phone" required data-validation-required-message="전화번호를 입력하세요.">
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>메시지</label>
+              <textarea rows="5" class="form-control" placeholder="메시지" id="message" required data-validation-required-message="메시지를 입력하세요."></textarea>
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <br>
+          <div id="success"></div>
+          <button type="submit" class="btn btn-primary" id="sendMessageButton">전송</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  {% include "footer.html" %}

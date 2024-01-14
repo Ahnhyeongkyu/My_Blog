@@ -1,0 +1,79 @@
+{% include "header.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+  <!-- 페이지 헤더 -->
+  <header class="masthead" style="background-image: url('{{post.img_url}}')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="post-heading">
+            <h1>{{post.title}}</h1>
+            <h2 class="subheading">{{post.subtitle}}</h2>
+            <span class="meta">작성자
+              <a href="#">{{post.author.name}}</a>
+              - {{post.date}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 포스트 내용 -->
+  <article>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <!-- 포스트 본문 표시 -->
+            {{ post.body|safe }}
+          <hr>
+
+            {% if current_user.id == 1: %}
+            <!-- 관리자 계정인 경우 수정 버튼 표시 -->
+            <div class="clearfix">
+            <a class="btn btn-primary float-right" href="{{url_for('edit_post', post_id=post.id)}}">수정</a>
+            </div>
+            {% endif %}
+
+<!--           댓글 영역 -->
+          {% with messages = get_flashed_messages() %}
+          {% if messages: %}
+            {% for message in messages: %}
+              <!-- 플래시 메시지 표시 -->
+              <p style="color: red; text-align: center; margin: 0 auto;">{{ message }}</p>
+            {% endfor %}
+          {% endif %}
+          {% endwith %}
+
+          {{ ckeditor.load() }}
+          {{ ckeditor.config(name='comment_text') }}
+          <!-- 댓글 작성 폼 표시 -->
+          {{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+
+          <div class="col-lg-8 col-md-10 mx-auto comment" style="white-space:nowrap;">
+              <ul class="commentList">
+                {% for comment in comments: %}
+                <li>                                    
+                    <div class="commentText">
+                      <!-- 댓글 내용 표시 -->
+                      <p>{{ comment.text|safe }}</p>
+                      <!-- 댓글 작성자 및 작성일 표시 -->
+                      <span class="date sub-text">{{comment.comment_author.name }}</span> 
+                    {% if current_user.id == 1: %}
+                      <!-- 관리자 계정인 경우 댓글 삭제 링크 표시 -->
+                      <a href="{{url_for('delete_comment', comment_id=comment.id)}}">✘</a>
+                    {% endif %}
+                    </div>
+                    
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+
+          </div>
+      </div>
+    </div>
+  </article>
+
+  <hr>
+{% include "footer.html" %}

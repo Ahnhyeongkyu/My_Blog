@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- 문자 인코딩 및 뷰포트 설정 -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- 페이지 제목 설정 -->
+  <title>An's Tech Blog</title>
+
+  <!-- 부트스트랩 기본 CSS -->
+  <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+  <!-- 이 템플릿을 위한 사용자 정의 글꼴 -->
+  <link href="{{ url_for('static', filename='vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+  <!-- 이 템플릿을 위한 사용자 정의 스타일 시트 -->
+  <link href="{{ url_for('static', filename='css/clean-blog.min.css')}}" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- 네비게이션 -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+      <!-- 로고와 브랜드 링크 -->
+      <a class="navbar-brand" href="{{url_for('get_all_posts')}}">Tech Blog</a>
+      <!-- 네비게이션 토글 버튼 -->
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        메뉴
+        <i class="fas fa-bars"></i>
+      </button>
+      <!-- 네비게이션 메뉴 -->
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <!-- 홈으로 링크 -->
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('get_all_posts') }}">홈으로</a>
+          </li>
+          <!-- 사용자가 로그인하지 않은 경우 -->
+          {% if not current_user.is_authenticated: %}
+          <!-- 로그인 및 회원가입 링크 -->
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('login') }}">로그인</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('register') }}">회원가입</a>
+          </li>
+          {% else %}
+          <!-- 사용자가 로그인한 경우 -->
+          <!-- 로그아웃 링크 -->
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('logout') }}">로그아웃</a>
+          </li>
+          {% endif %}
+          <!-- 자기소개 및 문의사항 링크 -->
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('about') }}">자기소개</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('contact') }}">문의사항</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>

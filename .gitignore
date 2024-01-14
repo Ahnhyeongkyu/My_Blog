@@ -1,0 +1,179 @@
+# 이 파일은 .gitignore 파일로, 여기에 있는 폴더 및 파일 유형들은
+# 버전 관리에 추가되지 않고 GitHub에 업로드되지 않습니다.
+# 예를 들어, Pycharm 및 VS Code의 숨겨진 파일들을 무시합니다.
+.idea/
+.vscode
+
+### 또한 macOS에 특정한 파일들
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+# 그리고 섬네일
+._*
+
+# Pycharm과 VS Code의 숨겨진 파일
+.idea/
+.vscode
+
+# macOS 특정 파일들
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+# 섬네일 파일
+._*
+
+# 이미 컴파일된 / 최적화된 / DLL 파일들
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C 확장자들
+*.so
+
+# 배포 / 패키지 관련
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+# 일반적으로 이러한 파일들은 PyInstaller가 exe를 빌드하기 전에
+# 템플릿에서 파이썬 스크립트에 날짜/기타 정보를 주입하는 용도로
+# 파이썬 스크립트에 의해 쓰입니다.
+*.manifest
+*.spec
+
+# Installer 로그
+pip-log.txt
+pip-delete-this-directory.txt
+
+# 단위 테스트 / 커버리지 보고서
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# 번역
+*.mo
+*.pot
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask
+instance/
+.webassets-cache
+
+# Scrapy
+.scrapy
+
+# Sphinx 문서
+docs/_build/
+
+# PyBuilder
+.pybuilder/
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+#   라이브러리나 패키지의 경우 여러 환경에서 실행되도록 코드가
+#   의도되어 있기 때문에 이러한 파일을 무시하는 것이 좋습니다.
+# .python-version
+
+# pipenv
+#   pypa/pipenv#598에 따르면 Pipfile.lock를 버전 관리에 포함하는 것이 좋습니다.
+#   그러나 협업의 경우 플랫폼별 종속성이나 교차 플랫폼 지원이 없는 종속성을 가질 수 있으므로
+#   pipenv는 작동하지 않거나 필요한 모든 종속성을 설치하지 않을 수 있습니다.
+# Pipfile.lock
+
+# poetry
+#   Pipfile.lock과 유사하게 poetry.lock를 버전 관리에 포함하는 것이 좋습니다.
+#   특히 바이너리 패키지의 경우 재현성을 보장하기 위해 권장되며,
+#   라이브러리의 경우 덜 흔하게 무시됩니다.
+#   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
+# poetry.lock
+
+# pdm
+#   Pipfile.lock와 유사하게 pdm.lock를 버전 관리에 포함하는 것이 좋습니다.
+# pdm.lock
+#   pdm은 프로젝트 전역 구성을 .pdm.toml에 저장하지만
+#   버전 관리에 포함하지 않는 것이 좋습니다.
+#   https://pdm.fming.dev/#use-with-ide
+.pdm.toml
+
+# PEP 582; github.com/David-OConnor/pyflow 및 github.com/pdm-project/pdm에서 사용됨
+__pypackages__/
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath 파싱된 파일
+*.sage.py
+
+# 환경 설정
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder 프로젝트 설정
+.spyderproject
+.spyproject
+
+# Rope 프로젝트 설정
+.ropeproject
+
+# mkdocs 문서
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre 타입 체커
+.pyre/
+
+# pytype 정적 타입 분석기
+.pytype/
+
+# Cython 디버그 심볼
+cython_debug/
