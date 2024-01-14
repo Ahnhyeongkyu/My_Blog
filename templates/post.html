@@ -36,15 +36,7 @@
             {% endif %}
 
 <!--           댓글 영역 -->
-          {% with messages = get_flashed_messages() %}
-          {% if messages: %}
-            {% for message in messages: %}
-              <!-- 플래시 메시지 표시 -->
-              <p style="color: red; text-align: center; margin: 0 auto;">{{ message }}</p>
-            {% endfor %}
-          {% endif %}
-          {% endwith %}
-
+          
           {{ ckeditor.load() }}
           {{ ckeditor.config(name='comment_text') }}
           <!-- 댓글 작성 폼 표시 -->

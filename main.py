@@ -158,7 +158,6 @@ def show_post(post_id):
     comments = Comment.query.filter_by(parent_post_id=post_id).all()
     if request.method == "POST":
         if not current_user.is_authenticated:
-            flash("로그인이 필요합니다")
             return redirect(url_for("login"))
         
         new_comment = Comment(
