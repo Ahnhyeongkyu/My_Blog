@@ -10,7 +10,7 @@ from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 from functools import wraps
 import os
 
-# from flask_gravatar import Gravatar
+
 
 app = Flask(__name__)
 # app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
@@ -18,7 +18,7 @@ app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY')
 ckeditor = CKEditor(app)
 Bootstrap(app)
 
-##CONNECT TO DB
+#DB에 연결
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DB_URI", "sqlite:///blog.db")
 
@@ -26,7 +26,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
 
-##CONFIGURE TABLES
+#각 테이블 config
 
 class BlogPost(db.Model):
     __tablename__ = "blog_posts"
@@ -57,9 +57,11 @@ class Comment(db.Model):
     parent_post_id = db.Column(db.Integer, db.ForeignKey('blog_posts.id'), nullable=False)
     parent_post = db.relationship("BlogPost", back_populates="comments")
 
+#DB 생성
 with app.app_context():
     db.create_all()
 
+#관리자 권한 데코레이터 생성
 def admin_only(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -72,10 +74,12 @@ def admin_only(f):
     return decorated_function
 
 
+#user_loader를 사용해서 current_user관리
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 
+#홈페이지에 모든 게시물 렌더링
 @app.route('/')
 def get_all_posts():
     posts = BlogPost.query.all()
@@ -83,6 +87,7 @@ def get_all_posts():
     return render_template("index.html", all_posts=posts)
 
 
+#회원가입 페이지
 @app.route('/register', methods=["GET","POST"])
 def register():
     form = RegisterForm()
@@ -113,6 +118,7 @@ def register():
     return render_template("register.html", form=form)
 
 
+#로그인 페이지
 @app.route('/login', methods=["GET","POST"])
 def login():
     form = LoginForm()
@@ -135,12 +141,14 @@ def inject_user():
     return dict(current_user=current_user)
 
 
+#로그아웃 후 홈페이지로 이동
 @app.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('get_all_posts'))
 
 
+#각 게시물 렌더링 및 댓글 기능
 @app.route("/post/<int:post_id>", methods=["GET","POST"])
 def show_post(post_id):
     form = CommentForm()
@@ -166,16 +174,19 @@ def show_post(post_id):
     return render_template("post.html", post=requested_post, form=form, current_user=current_user, comments=comments)
 
 
+#자기소개 페이지
 @app.route("/about")
 def about():
     return render_template("about.html")
 
 
+#문의사항 페이지
 @app.route("/contact")
 def contact():
     return render_template("contact.html")
 
 
+#새로운 게시물 추가 페이지(관리자만 가능)
 @app.route("/new-post", methods=["GET","POST"])
 @admin_only
 def add_new_post():
@@ -195,6 +206,7 @@ def add_new_post():
     return render_template("make-post.html", form=form)
 
 
+#게시물 수정 페이지(관리자만 가능)
 @app.route("/edit-post/<int:post_id>", methods=["GET","POST"])
 @admin_only
 def edit_post(post_id):
@@ -217,6 +229,7 @@ def edit_post(post_id):
     return render_template("make-post.html", form=edit_form)
 
 
+#게시물 삭제(관리자만 가능)
 @app.route("/delete/<int:post_id>")
 @admin_only
 def delete_post(post_id):
@@ -225,6 +238,7 @@ def delete_post(post_id):
     db.session.commit()
     return redirect(url_for('get_all_posts'))
 
+#댓글 삭제(관리자만 가능)
 @app.route("/delete-comment/<int:comment_id>")
 @admin_only
 def delete_comment(comment_id):
