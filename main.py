@@ -3,7 +3,7 @@ from flask_bootstrap import Bootstrap
 from flask_ckeditor import CKEditor
 from datetime import date
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy, pagination
 from sqlalchemy.orm import relationship
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
@@ -81,12 +81,19 @@ def admin_only(f):
 def load_user(user_id):
     return User.query.get(int(user_id))
 
+
 #홈페이지에 모든 게시물 렌더링
 @app.route('/')
 def get_all_posts():
-    posts = BlogPost.query.all()
     
-    return render_template("index.html", all_posts=posts)
+    #현재 페이지 가져오기
+    page = request.args.get('page', 1, type=int)
+
+    #한 페이지에 표시할 게시물 수
+    per_page = 5
+    pagination = BlogPost.query.order_by(BlogPost.date.desc()).paginate(page=page, per_page=per_page, error_out=False)
+    posts = pagination.items
+    return render_template("index.html", all_posts=posts, pagination=pagination)
 
 
 #회원가입 페이지

@@ -49,6 +49,29 @@
           <a class="btn btn-primary float-right" href="{{url_for('add_new_post')}}">새 게시물 작성</a>
         </div>
         {% endif %}
+
+        <!-- 페이징 네비게이션 -->
+        <div class="clearfix">
+          <ul class="pagination">
+              {% if pagination.has_prev %}
+                  <li class="page-item">
+                      <a class="page-link" href="{{ url_for('get_all_posts', page=pagination.prev_num) }}">이전</a>
+                  </li>
+              {% endif %}
+
+              {% for page_num in pagination.iter_pages() %}
+                  <li class="page-item {% if page_num == pagination.page %}active{% endif %}">
+                      <a class="page-link" href="{{ url_for('get_all_posts', page=page_num) }}">{{ page_num }}</a>
+                  </li>
+              {% endfor %}
+
+              {% if pagination.has_next %}
+                  <li class="page-item">
+                      <a class="page-link" href="{{ url_for('get_all_posts', page=pagination.next_num) }}">다음</a>
+                  </li>
+              {% endif %}
+          </ul>
+      </div>
       </div>
     </div>
   </div>
