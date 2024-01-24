@@ -1,5 +1,5 @@
 # 🔖My Blog
-My_Blog"은 Flask 웹 애플리케이션을 활용하여 구축된 개인 블로그 플랫폼입니다.
+My_Blog은 Flask 웹 애플리케이션을 활용하여 구축된 개인 블로그 플랫폼입니다.
 
 https://ans-tech-blog.onrender.com/
 
