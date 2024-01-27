@@ -110,7 +110,7 @@ https://ans-tech-blog.onrender.com/
 - 해결책:
   - SQLAlchemy의 paginate 메서드를 사용하여 페이지네이션을 구현하였습니다. 또한 Jinja2 템플릿 엔진을 사용하여 페이지네이션 버튼을 동적으로 생성하여 사용자 편의성을 높였습니다.
 
-- [코드확인](https://github.com/Ahnhyeongkyu/My_Blog/blob/main/main.py#L85)
+- 🔖[코드확인](https://github.com/Ahnhyeongkyu/My_Blog/blob/main/main.py#L85)
 
 ### 5-2 댓글 삭제 시 외래 키 제약 조건
 
@@ -120,7 +120,7 @@ https://ans-tech-blog.onrender.com/
 - 해결책:
   - SQLAlchemy에서 cascade 속성을 사용하여 외래 키 제약 조건을 해결하였습니다. 댓글을 삭제할 때 해당 게시물의 외래 키 조건도 함께 삭제되도록 설정하였습니다.
 
-- [코드확인](https://github.com/Ahnhyeongkyu/My_Blog/blob/main/main.py#L53)
+- 🔖[코드확인](https://github.com/Ahnhyeongkyu/My_Blog/blob/main/main.py#L53)
 
 
 ## 6. 그 외 트러블 슈팅
